@@ -6,10 +6,14 @@ const server=http.createServer((req,res)=>{
     const method=req.method;
     if(url==='/'){
         //form
+        fs.readFile('formValues.txt',(err,data)=>{
+            const userName=data.toString();
+        
 
         res.setHeader(`Content-type`,`text/html`);
         res.end(
             `
+            <h3>${userName}<h3>
             <form action='/message' method='POST'>
             <label>Name:</label>
             <input type='text' name='username'></input>
@@ -17,6 +21,7 @@ const server=http.createServer((req,res)=>{
             </form>
             `
         )
+        })
 
 
     }else{
